@@ -1,0 +1,9 @@
+#
+# ldapadd -H ldapi:// -Y EXTERNAL -f us_cn.ldif
+#
+dn: dc=us,dc=loopback,dc=world
+associateddomain: us
+dc: us
+objectclass: dNSDomain
+objectclass: domainRelatedObject
+objectclass: top

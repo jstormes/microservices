@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  lamp:
+    build: .
+    environment:
+        XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9000 remote_autostart=1
+        REDIS: redis.loopback.world
+        LDAP1: LOOPBACK:us.loopback.world:DC=us,DC=loopback,DC=world:OpenLDAP:\var\www\cert\loopback.crt
+        DB_OAUTH2: localhost:3306:root:naked
+    ports:
+      - 443:443
+      - 4000:3306
+      - 80:80
+      - 8081:8081
+      - 8082:8082
+    volumes:
+      - ./:/var/www
