@@ -58,7 +58,11 @@ RUN chown :ssl-cert /etc/ssl/private/loopback.world.privkey.pem \
 ############################################################################
 RUN echo "TLS_REQCERT ALLOW" >> /etc/ldap/ldap.conf
 
-
+############################################################################
+# Install Swoole
+############################################################################
+RUN pecl install swoole \
+    && docker-php-ext-enable swoole
 
 
 
