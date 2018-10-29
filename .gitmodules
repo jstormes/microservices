@@ -1,0 +1,3 @@
+[submodule "SpeedTest"]
+	path = SpeedTest
+	url = git@github.com:jstormes/SpeedTest.git
