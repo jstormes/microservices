@@ -1,0 +1,73 @@
+File with stuff you can copy and past during class:
+
+
+############################################################################
+# To Clone the repo, but if you are reading this you have already done that.
+############################################################################
+
+git clone https://github.com/jstormes/microservices.git
+cd microservices
+git submodule init
+git submodule update
+
+
+
+############################################################################
+# To start the Docker Container:
+############################################################################
+docker-compose run --service-ports lamp bash
+
+
+############################################################################
+# To Run the Example
+############################################################################
+cd SpeedTest
+composer install
+composer development-enable
+php public/index.php start >>/dev/null 2>&1 &
+
+
+############################################################################
+# To see the running web processes
+############################################################################
+ps -ef
+
+############################################################################
+# To see the listening services
+############################################################################
+netstat -tulpn
+
+
+############################################################################
+# Links to Swoole Stuff
+############################################################################
+https://github.com/zendframework/zend-expressive-swoole/blob/master/docs/book/v1/how-it-works.md
+
+
+############################################################################
+############################################################################
+# Creating your own PHP Expressive Micro-service from scratch.
+############################################################################
+############################################################################
+composer create-project zendframework/zend-expressive-skeleton <project-path>
+cd <project-path>
+composer require zendframework/zend-expressive-swoole
+cp ../SpeedTest/config/autoload/swool.global.php config/autoload/
+php public/index.php start
+http://myproject.loopback.world:8081
+
+###########################################################################
+# Adding your own logic
+###########################################################################
+cp src/App/Handler/HomePageHandler.php src/App/Handler/UuidPageHandler.php
+cp src/App/Handler/HomePageHandlerFactory.php src/App/Handler/UuidPageHandlerFactory.php
+
+
+
+
+
+
+
+
+
+
