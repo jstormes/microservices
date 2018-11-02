@@ -29,6 +29,8 @@ inside that, you can see the contents by browsing to “https://mysite.loopback.
 In addition to Apache2 hosted websites you can create sites hosted directly hosted by PHP.  These sites can be hosted 
 on ports 8081 and 8082, and can be opened with your browser at http://loopback.world:8081 or http://loopback.world:8082.
 
+## Tools
+
 You can find a list of tools by opening your browser to https://loopback.world.
 
 ## XDebug

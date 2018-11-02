@@ -2,7 +2,8 @@ version: '3'
 
 services:
   lamp:
-    build: .
+#    build: .
+    image: "jstormes/fa:latest"
     environment:
         XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9000 remote_autostart=1
         REDIS: redis.loopback.world
