@@ -63,3 +63,86 @@ By default this setup will try and connect to the hosting machines ip address fo
  * Test User
     * Distinguished Name: cn=test.u,dc=us,dc=loopback,dc=world
     * Password = test
+
+
+Swoole Links
+
+* https://mwop.net/blog/2018-10-16-swoole.html
+* https://github.com/swoole/swoole-src/tree/master/examples
+
+
+Tutorial Stuff you can copy and past:
+         
+```bash        
+############################################################################
+# To Clone the repo, but if you are reading this you have already done that.
+############################################################################
+ 
+git clone https://github.com/jstormes/microservices.git
+cd microservices
+git submodule init
+git submodule update
+ 
+         
+         
+############################################################################
+# To start the Docker Container:
+############################################################################
+docker-compose run --service-ports lamp bash
+
+
+############################################################################
+# To Run the Example
+############################################################################
+cd SpeedTest
+composer install
+composer development-enable
+php public/index.php start >>/dev/null 2>&1 &
+
+# Open the following in your browser http://speedtest.loopback.world/test.php
+
+
+############################################################################
+# To see the running web processes
+############################################################################
+ps -ef
+
+############################################################################
+# To see the listening services
+############################################################################
+netstat -tulpn
+
+
+############################################################################
+# Links to Swoole Stuff
+############################################################################
+https://github.com/zendframework/zend-expressive-swoole/blob/master/docs/book/v1/how-it-works.md
+
+
+
+############################################################################
+# Creating your own PHP Expressive Micro-service from scratch.
+############################################################################
+composer create-project zendframework/zend-expressive-skeleton <project-path>
+cd <project-path>
+composer require zendframework/zend-expressive-swoole
+cp ../SpeedTest/config/autoload/swool.global.php config/autoload/
+# Edit the swool.global.php file and change the port to 8081
+php public/index.php start
+http://myproject.loopback.world:8081
+
+
+###########################################################################
+# Adding your own logic
+###########################################################################
+cp src/App/Handler/HomePageHandler.php src/App/Handler/UuidPageHandler.php
+cp src/App/Handler/HomePageHandlerFactory.php src/App/Handler/UuidPageHandlerFactory.php
+# edit the files
+
+
+##########################################################################
+# Test yourself
+##########################################################################
+https://www.flexiquiz.com/SC/N/28353066-9d81-4d18-a628-cb51db5e4c26
+         
+```
