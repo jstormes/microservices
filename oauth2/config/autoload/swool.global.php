@@ -15,8 +15,7 @@ return [
             'port' => 8443,
             'mode' => SWOOLE_BASE, // SWOOLE_BASE or SWOOLE_PROCESS;
             // SWOOLE_BASE is the default
-            'protocol' => SWOOLE_SOCK_TCP | SWOOLE_SSL, // SSL-enable the server
-            //'protocol' => SWOOLE_SOCK_TCP , // SSL-enable the server
+            'protocol' => SWOOLE_PROCESS | SWOOLE_SOCK_TCP | SWOOLE_SSL, // SSL-enable the server
             'options' => [
                 // Set the SSL certificate and key paths for SSL support:
                 'ssl_cert_file' => 'tls/certs/loopback.world.cert.pem',
@@ -24,6 +23,7 @@ return [
                 // Available in Swoole 4.1 and up; enables coroutine support
                 // for most I/O operations:
                 'enable_coroutine' => true,
+                'open_http2_protocol' => true,
             ],
         ],
     ],
