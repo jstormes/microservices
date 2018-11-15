@@ -1,0 +1,7 @@
+#!/usr/bin/expect -f 
+send y
+send y
+send y
+send y
+send y
+send n

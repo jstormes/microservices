@@ -5,7 +5,7 @@ FROM php:7-apache
 ############################################################################
 RUN apt-get update \
     && apt-get install -y curl wget git zip unzip zlib1g-dev libpng-dev \
-       gnupg2 libldap2-dev ssl-cert \
+       gnupg2 libldap2-dev ssl-cert libssh-dev expect \
     && apt-get autoremove \
     && apt-get clean \
     && yes '' | pecl install -f redis \
@@ -61,8 +61,13 @@ RUN echo "TLS_REQCERT ALLOW" >> /etc/ldap/ldap.conf
 ############################################################################
 # Install Swoole
 ############################################################################
-RUN pecl install swoole \
+#ADD assets/scripts/install_swoole.exp /root/bin/install_swoole.exp
+ADD assets/scripts/pecl_swool_answers.txt /root/bin/
+RUN cat /root/bin/pecl_swool_answers.txt | pecl install swoole \
     && docker-php-ext-enable swoole
+#RUN chmod u+x /root/bin/install_swoole.exp \
+#    && /root/bin/install_swoole.exp \
+#    && docker-php-ext-enable swoole
 
 
 
@@ -158,18 +163,18 @@ RUN apt-get install -y mariadb-server mariadb-client \
 #############################################################################
 # Setup phpMyAdmin at https://sql.loopback.world
 #############################################################################
-ADD assets/tools/apache2/tools.conf /etc/apache2/conf-enabled
-ADD assets/tools/apache2/sites/ /etc/apache2/sites-enabled/
-RUN echo "###################################################################" \
-    && echo "Installing PhpMyAdmin, that can take some time, please wait..." \
-    && echo "###################################################################" \
-    && mkdir -p /var/tools \
-    && git clone https://github.com/phpmyadmin/phpmyadmin.git /var/tools/phpmyadmin \
-    && cd /var/tools/phpmyadmin \
-    && composer -n --no-ansi --optimize-autoloader install \
-    && mkdir tmp \
-    && chmod a+rw tmp
-ADD assets/tools/phpMyAdmin/config.inc.php /var/tools/phpmyadmin
+#ADD assets/tools/apache2/tools.conf /etc/apache2/conf-enabled
+#ADD assets/tools/apache2/sites/ /etc/apache2/sites-enabled/
+#RUN echo "###################################################################" \
+#    && echo "Installing PhpMyAdmin, that can take some time, please wait..." \
+#    && echo "###################################################################" \
+#    && mkdir -p /var/tools \
+#    && git clone https://github.com/phpmyadmin/phpmyadmin.git /var/tools/phpmyadmin \
+#    && cd /var/tools/phpmyadmin \
+#    && composer -n --no-ansi --optimize-autoloader install \
+#    && mkdir tmp \
+#    && chmod a+rw tmp
+#ADD assets/tools/phpMyAdmin/config.inc.php /var/tools/phpmyadmin
 
 #############################################################################
 # Setup at and cron
