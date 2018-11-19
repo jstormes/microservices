@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace OAuth2;
 
-use App\Repositories\UserRepository;
-use App\Entities\ClientEntity;
+use League\OAuth2\Server\CryptKey;
 use http\Exception;
 use PSR7Sessions\Storageless\Http\SessionMiddleware;
 
@@ -68,18 +67,28 @@ class ConfigProvider
      */
     public function getDependencies() : array
     {
+
         return [
             'invokables' => [
 //                UserRepository::class => UserRepository::class,
-//                ClientEntity::class => ClientEntity::class
+                Entities\ClientEntity::class => Entities\ClientEntity::class,
+                Repositories\ClientRepository::class => Repositories\ClientRepository::class,
+                Repositories\AccessTokenRepository::class => Repositories\AccessTokenRepository::class,
+                Repositories\ScopeRepository::class => Repositories\ScopeRepository::class,
+                Repositories\UserRepository::class => Repositories\UserRepository::class,
+                Repositories\RefreshTokenRepository::class => Repositories\RefreshTokenRepository::class,
+                Repositories\AuthCodeRepository::class => Repositories\AuthCodeRepository::class,
             ],
             'factories'  => [
+                SessionMiddleware::class => SessionMiddlewareFactory::class,
+                CryptKey::class => CryptKeyFactory::class,
+
 //                Handler\OAuth2Handler::class => Handler\OAuth2HandlerFactory::class,
-//                Handler\AuthorizationHandler::class => Handler\AuthorizationHandlerFactory::class,
+                Handler\AuthorizationHandler::class => Handler\AuthorizationHandlerFactory::class,
 //                Handler\SigninHandler::class => Handler\SigninHandlerFactory::class,
 //                Handler\SignoutHandler::class => Handler\SignoutHandlerFactory::class,
 //                HtmlGateway::class => HtmlGatewayFactory::class,
-                SessionMiddleware::class => SessionMiddlewareFactory::class,
+
             ]
         ];
     }
@@ -91,7 +100,7 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'signin'    => [__DIR__ . '/templates/signin'],
+                'oauth2'    => [__DIR__ . '/templates/oauth2'],
                 'signout'    => [__DIR__ . '/templates/signout'],
                 'authorization'    => [__DIR__ . '/templates/authorization']
             ],

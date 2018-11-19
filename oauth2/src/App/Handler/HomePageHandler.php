@@ -15,6 +15,8 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\Expressive\Twig\TwigRenderer;
 use Zend\Expressive\ZendView\ZendViewRenderer;
 
+use PSR7Sessions\Storageless\Http\SessionMiddleware;
+
 class HomePageHandler implements RequestHandlerInterface
 {
     /** @var string */
@@ -38,6 +40,11 @@ class HomePageHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
+        /* @var \PSR7Sessions\Storageless\Session\DefaultSessionData $session */
+        $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
+        //$session->set('test','cat');
+
+
         if ($this->template === null) {
             return new JsonResponse([
                 'welcome' => 'Congratulations! You have installed the zend-expressive skeleton application.',
@@ -74,6 +81,9 @@ class HomePageHandler implements RequestHandlerInterface
                 $data['containerDocs'] = 'http://php-di.org';
                 break;
         }
+
+
+
 
         if ($this->router instanceof Router\AuraRouter) {
             $data['routerName'] = 'Aura.Router';

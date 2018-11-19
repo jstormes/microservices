@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
 use Zend\Expressive\MiddlewareFactory;
+use Zend\Expressive\Router\Route;
 
 /**
  * Setup routes with a single request method:
@@ -35,4 +36,5 @@ use Zend\Expressive\MiddlewareFactory;
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
     $app->get('/', App\Handler\HomePageHandler::class, 'home');
     $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
+    $app->route('/oauth2/signin', OAuth2\Handler\AuthorizationHandler::class,Route::HTTP_METHOD_ANY,'oauth2.signin');
 };
