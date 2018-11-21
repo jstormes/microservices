@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+
 /**
  * The configuration provider for the App module
  *
@@ -37,6 +38,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
+                \EZAuth2\Middleware\OAuth2AuthorizationMiddleware::class => OAuth2AuthorizationMiddlewareFactory::class,
             ],
         ];
     }

@@ -11,7 +11,7 @@ namespace OAuth2\Repositories;
 
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
-use App\Entities\ScopeEntity;
+use OAuth2\Entities\ScopeEntity;
 
 class ScopeRepository implements ScopeRepositoryInterface
 {

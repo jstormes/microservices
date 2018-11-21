@@ -70,7 +70,7 @@ class ConfigProvider
 
         return [
             'invokables' => [
-//                UserRepository::class => UserRepository::class,
+                UserRepository::class => UserRepository::class,
                 Entities\ClientEntity::class => Entities\ClientEntity::class,
                 Repositories\ClientRepository::class => Repositories\ClientRepository::class,
                 Repositories\AccessTokenRepository::class => Repositories\AccessTokenRepository::class,
@@ -83,7 +83,7 @@ class ConfigProvider
                 SessionMiddleware::class => SessionMiddlewareFactory::class,
                 CryptKey::class => CryptKeyFactory::class,
 
-//                Handler\OAuth2Handler::class => Handler\OAuth2HandlerFactory::class,
+                Handler\OAuth2Handler::class => Handler\OAuth2HandlerFactory::class,
                 Handler\AuthorizationHandler::class => Handler\AuthorizationHandlerFactory::class,
 //                Handler\SigninHandler::class => Handler\SigninHandlerFactory::class,
 //                Handler\SignoutHandler::class => Handler\SignoutHandlerFactory::class,
@@ -100,9 +100,7 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'oauth2'    => [__DIR__ . '/templates/oauth2'],
-                'signout'    => [__DIR__ . '/templates/signout'],
-                'authorization'    => [__DIR__ . '/templates/authorization']
+                'oauth2'    => [__DIR__ . '/templates/oauth2']
             ],
         ];
     }

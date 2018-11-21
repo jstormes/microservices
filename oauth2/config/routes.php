@@ -34,7 +34,8 @@ use Zend\Expressive\Router\Route;
  * );
  */
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
-    $app->get('/', App\Handler\HomePageHandler::class, 'home');
+    $app->get('/app', App\Handler\HomePageHandler::class, 'home');
     $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
-    $app->route('/oauth2/signin', OAuth2\Handler\AuthorizationHandler::class,Route::HTTP_METHOD_ANY,'oauth2.signin');
+    $app->post('/oauth2', OAuth2\Handler\OAuth2Handler::class, 'oauth2');
+    $app->route('/oauth2/auth', OAuth2\Handler\AuthorizationHandler::class,Route::HTTP_METHOD_ANY,'oauth2.signin');
 };
