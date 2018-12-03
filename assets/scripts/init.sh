@@ -31,7 +31,9 @@ mysqld_safe &
 MYSQL_PID=$!
 
 echo "Starting Apache"
+export PHP_INI_SCAN_DIR=/usr/local/etc/php/conf.apache.d
 apachectl -DFOREGROUND &
+unset PHP_INI_SCAN_DIR
 APACHE_PID=$!
 
 echo "Starting Cron"
